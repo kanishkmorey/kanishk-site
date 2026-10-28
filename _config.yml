@@ -1,7 +1,7 @@
 # Site-wide settings
 title: Kanishk
 description: Personal website of Kanishk
-url: ""        # e.g. https://<username>.github.io
+url: "https://kanishkmorey.com"
 baseurl: ""    # leave empty unless the site lives in a sub-folder (project repo)
 
 # Contact page
