@@ -1,0 +1,23 @@
+---
+layout: default
+---
+{%- assign words = content | number_of_words %}
+{%- assign minutes = words | divided_by: 200 | at_least: 1 %}
+    <div class="article-wrap">
+      <article class="article post">
+        <div class="article-head">
+          <a class="back" href="{{ '/writing/' | relative_url }}">← All writing</a>
+          <h1>{{ page.title }}</h1>
+          <p class="meta">{{ page.date | date: "%b %-d, %Y" }} · {{ minutes }} min read</p>
+        </div>
+        <div class="prose">
+{{ content }}
+        </div>
+        <footer class="article-foot">
+          <a href="{{ '/writing/' | relative_url }}">← All writing</a>
+          {%- if page.previous %}
+          <a class="next" href="{{ page.previous.url | relative_url }}">Next: {{ page.previous.title }} →</a>
+          {%- endif %}
+        </footer>
+      </article>
+    </div>

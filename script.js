@@ -2,9 +2,12 @@
 document.querySelectorAll('[data-pager]').forEach(function (root) {
   var track = root.querySelector('.track');
   var pages = Array.prototype.slice.call(track.children);
-  var prev = root.querySelector('.arrow.prev');
-  var next = root.querySelector('.arrow.next');
-  var dotsWrap = root.querySelector('.dots');
+  var pager = root.querySelector('.pager');
+  if (pages.length < 2) { pager.hidden = true; return; }
+
+  var prev = pager.querySelector('.arrow.prev');
+  var next = pager.querySelector('.arrow.next');
+  var dotsWrap = pager.querySelector('.dots');
   var current = 0;
 
   // Build one dot per page
@@ -35,6 +38,10 @@ document.querySelectorAll('[data-pager]').forEach(function (root) {
   }
   prev.addEventListener('click', function () { go(current - 1); });
   next.addEventListener('click', function () { go(current + 1); });
-  if (pages.length < 2) root.querySelector('.pager').hidden = true;
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (e.key === 'ArrowLeft') go(current - 1);
+    if (e.key === 'ArrowRight') go(current + 1);
+  });
   go(0);
 });

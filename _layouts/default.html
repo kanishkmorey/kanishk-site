@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- assign page_title = site.title %}
+{%- if page.title %}{% capture page_title %}{{ page.title }} — {{ site.title }}{% endcapture %}{% endif %}
+{%- assign page_desc = page.summary | default: page.description | default: site.description %}
+<title>{{ page_title | escape }}</title>
+<meta name="description" content="{{ page_desc | strip_html | escape }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ page_desc | strip_html | escape }}">
+<meta property="og:type" content="website">
+<link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+</head>
+<body>
+<main class="frame">
+  {%- unless page.home %}
+  <header class="site-header">
+    <a class="logo" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ '/writing/' | relative_url }}"{% if page.nav == 'writing' %} aria-current="page"{% endif %}>Writing</a>
+      <a href="{{ '/projects/' | relative_url }}"{% if page.nav == 'projects' %} aria-current="page"{% endif %}>Projects</a>
+      <a href="{{ '/contact/' | relative_url }}"{% if page.nav == 'contact' %} aria-current="page"{% endif %}>Contact</a>
+    </nav>
+  </header>
+  {%- endunless %}
+  <div class="scroll">
+{{ content }}
+  </div>
+</main>
+<script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+# Site-wide settings
+title: Kanishk
+description: Personal website of Kanishk
+url: ""        # e.g. https://<username>.github.io
+baseurl: ""    # leave empty unless the site lives in a sub-folder (project repo)
+
+# Contact page
+email: kanishkmorey10@gmail.com
+linkedin: kanishkmorey
+github: kanishkmorey
+
+# Tiles per page on Writing and Projects
+per_page: 4
+
+permalink: /writing/:title/
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope: { path: "", type: pages }
+    values: { layout: default }
+  - scope: { path: "", type: posts }
+    values: { layout: post, nav: writing }
+  - scope: { path: "", type: projects }
+    values: { layout: project, nav: projects }
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

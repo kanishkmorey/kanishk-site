@@ -1,38 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kanishk</title>
-<meta name="description" content="Personal website of Kanishk">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<main class="frame">
-  <div class="scroll">
+---
+home: true
+---
     <div class="center home">
       <div class="hero">
         <figure class="portrait">
-          <img src="images/office-window.jpg" alt="An office desk and chair in front of tall windows looking out over trees and buildings at dusk">
+          <img src="{{ '/images/office-window.jpg' | relative_url }}" alt="An office desk and chair in front of tall windows looking out over trees and buildings at dusk">
         </figure>
         <div class="intro">
           <p class="eyebrow">Hello, I’m</p>
-          <h1>Kanishk</h1>
-          <p class="tagline">[YOUR ROLE / ONE-LINE TAGLINE]</p>
-          <p class="blurb">[A SHORT INTRO, TWO OR THREE SENTENCES ABOUT WHAT YOU DO AND WHAT YOU CARE ABOUT.]</p>
+          <h1>{{ site.title }}</h1>
+          <p class="tagline">Software engineer building for the web.</p>
+          <p class="blurb">I design and build software, with a soft spot for simple, maintainable systems and clear interfaces. This is where I keep my notes and the things I’ve built.</p>
           <nav class="home-links" aria-label="Main">
-            <a href="writing.html">Writing</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
+            <a href="{{ '/writing/' | relative_url }}">Writing</a>
+            <a href="{{ '/projects/' | relative_url }}">Projects</a>
+            <a href="{{ '/contact/' | relative_url }}">Contact</a>
           </nav>
         </div>
       </div>
     </div>
-  </div>
-</main>
-<script src="script.js"></script>
-</body>
-</html>

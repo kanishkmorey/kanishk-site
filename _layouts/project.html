@@ -1,0 +1,46 @@
+---
+layout: default
+---
+{%- assign projects = site.projects | sort: "order" %}
+{%- for p in projects %}
+  {%- if p.url == page.url %}
+    {%- assign position = forloop.index %}
+    {%- assign next_project = projects[forloop.index] %}
+  {%- endif %}
+{%- endfor %}
+    <div class="article-wrap">
+      <article class="article project">
+        <div class="article-head">
+          <a class="back" href="{{ '/projects/' | relative_url }}">← All projects</a>
+          <p class="eyebrow">{{ position | prepend: "0" | slice: -2, 2 }}</p>
+          <h1>{{ page.title }}</h1>
+          <p class="summary">{{ page.summary }}</p>
+        </div>
+        <dl class="facts">
+          {%- if page.year %}<div><dt>Year</dt><dd>{{ page.year }}</dd></div>{% endif %}
+          {%- if page.role %}<div><dt>Role</dt><dd>{{ page.role }}</dd></div>{% endif %}
+          {%- if page.stack %}<div><dt>Built with</dt><dd>{{ page.stack }}</dd></div>{% endif %}
+          {%- if page.live or page.github %}
+          <div><dt>Links</dt><dd class="links">
+            {%- if page.live %}<a href="{{ page.live }}" target="_blank" rel="noopener">Live ↗</a>{% endif %}
+            {%- if page.github %}<a href="{{ page.github }}" target="_blank" rel="noopener">GitHub ↗</a>{% endif %}
+          </dd></div>
+          {%- endif %}
+        </dl>
+        {%- if page.image %}
+        <figure class="shot">
+          <div class="frame-img"><img src="{{ page.image | relative_url }}" alt="{{ page.caption | escape }}"></div>
+          {%- if page.caption %}<figcaption>{{ page.caption }}</figcaption>{% endif %}
+        </figure>
+        {%- endif %}
+        <div class="prose">
+{{ content }}
+        </div>
+        <footer class="article-foot">
+          <a href="{{ '/projects/' | relative_url }}">← All projects</a>
+          {%- if next_project %}
+          <a class="next" href="{{ next_project.url | relative_url }}">Next: {{ next_project.title }} →</a>
+          {%- endif %}
+        </footer>
+      </article>
+    </div>
