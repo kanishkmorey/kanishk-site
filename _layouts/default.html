@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- assign page_title = site.title %}
-{%- if page.title %}{% capture page_title %}{{ page.title }} — {{ site.title }}{% endcapture %}{% endif %}
+{%- if page.title %}{% capture page_title %}{{ page.title }} | {{ site.title }}{% endcapture %}{% endif %}
 {%- assign page_desc = page.summary | default: page.description | default: site.description %}
 <title>{{ page_title | escape }}</title>
 <meta name="description" content="{{ page_desc | strip_html | escape }}">
