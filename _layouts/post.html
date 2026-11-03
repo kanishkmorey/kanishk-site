@@ -8,16 +8,28 @@ layout: default
         <div class="article-head">
           <a class="back" href="{{ '/writing/' | relative_url }}">← All writing</a>
           <h1>{{ page.title }}</h1>
-          <p class="meta">{{ page.date | date: "%b %-d, %Y" }} · {{ minutes }} min read</p>
+          {%- if page.summary %}<p class="summary">{{ page.summary }}</p>{% endif %}
+          <p class="meta">{{ page.date | date: "%b %-d, %Y" }} · {{ minutes }} min read{% if page.updated %} · updated {{ page.updated | date: "%b %-d, %Y" }}{% endif %}</p>
+          {%- if page.tags.size > 0 %}
+          <ul class="tags">{% for tag in page.tags %}<li>{{ tag }}</li>{% endfor %}</ul>
+          {%- endif %}
         </div>
         <div class="prose">
 {{ content }}
         </div>
         <footer class="article-foot">
-          <a href="{{ '/writing/' | relative_url }}">← All writing</a>
-          {%- if page.previous %}
-          <a class="next" href="{{ page.previous.url | relative_url }}">Next: {{ page.previous.title }} →</a>
+          {%- if page.next or page.previous %}
+          <nav class="pn" aria-label="More posts">
+            {%- if page.next %}
+            <a class="prev" href="{{ page.next.url | relative_url }}"><span class="dir">← Newer</span><span class="t">{{ page.next.title }}</span></a>
+            {%- endif %}
+            {%- if page.previous %}
+            <a class="next" href="{{ page.previous.url | relative_url }}"><span class="dir">Older →</span><span class="t">{{ page.previous.title }}</span></a>
+            {%- endif %}
+          </nav>
           {%- endif %}
+          <a class="all" href="{{ '/writing/' | relative_url }}">← All writing</a>
+{%- include footer.html %}
         </footer>
       </article>
     </div>

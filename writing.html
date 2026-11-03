@@ -14,6 +14,7 @@ description: Notes and essays by Kanishk.
           <h1 class="page-title">Notes and essays</h1>
           <p class="lede">Notes on software, tools and how I build things.</p>
         </div>
+        {%- if site.posts.size == 0 %}<p class="empty">Nothing here yet. Check back soon.</p>{% endif %}
         <div class="viewport"><div class="track">
         {%- for post in site.posts %}
           {%- assign slot = forloop.index0 | modulo: per %}
@@ -23,7 +24,7 @@ description: Notes and essays by Kanishk.
           {%- endif %}
           <li><a class="tile post" href="{{ post.url | relative_url }}">
             <span class="date">{{ post.date | date: "%b %-d, %Y" }}</span>
-            <span class="body"><span class="title">{{ post.title }}</span><span class="line">{{ post.summary }}</span></span>
+            <span class="body"><span class="title">{{ post.title }}</span><span class="line">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncatewords: 24 }}</span></span>
           </a></li>
           {%- if slot == last_slot or forloop.last %}
         </ul>

@@ -15,6 +15,7 @@ description: Projects built by Kanishk.
           <h1 class="page-title">Tools and applications</h1>
           <p class="lede">Things I’ve built.</p>
         </div>
+        {%- if projects.size == 0 %}<p class="empty">Nothing here yet. Check back soon.</p>{% endif %}
         <div class="viewport"><div class="track">
         {%- for project in projects %}
           {%- assign slot = forloop.index0 | modulo: per %}
@@ -23,8 +24,8 @@ description: Projects built by Kanishk.
         <ul class="page grid" aria-label="Projects, page {{ page_no }} of {{ total_pages }}">
           {%- endif %}
           <li><a class="tile project" href="{{ project.url | relative_url }}">
-            <span class="num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
-            <span class="body"><span class="title">{{ project.title }}</span><span class="line">{{ project.summary }}</span></span>
+            <span class="top"><span class="num">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>{% if project.year %}<span class="year">{{ project.year }}</span>{% endif %}</span>
+            <span class="body"><span class="title">{{ project.title }}</span><span class="line">{{ project.summary | default: project.excerpt | strip_html | strip_newlines | truncatewords: 24 }}</span>{% if project.stack %}<span class="stack">{{ project.stack }}</span>{% endif %}</span>
           </a></li>
           {%- if slot == last_slot or forloop.last %}
         </ul>

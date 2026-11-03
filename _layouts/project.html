@@ -4,18 +4,20 @@ layout: default
 {%- assign projects = site.projects | sort: "order" %}
 {%- for p in projects %}
   {%- if p.url == page.url %}
-    {%- assign position = forloop.index %}
+    {%- assign idx = forloop.index0 %}
     {%- assign next_project = projects[forloop.index] %}
   {%- endif %}
 {%- endfor %}
+{%- if idx > 0 %}{% assign prev_idx = idx | minus: 1 %}{% assign prev_project = projects[prev_idx] %}{% endif %}
     <div class="article-wrap">
       <article class="article project">
         <div class="article-head">
           <a class="back" href="{{ '/projects/' | relative_url }}">← All projects</a>
-          <p class="eyebrow">{{ position | prepend: "0" | slice: -2, 2 }}</p>
+          <p class="eyebrow">{{ page.status | default: "Project" }}</p>
           <h1>{{ page.title }}</h1>
-          <p class="summary">{{ page.summary }}</p>
+          {%- if page.summary %}<p class="summary">{{ page.summary }}</p>{% endif %}
         </div>
+        {%- if page.year or page.role or page.stack or page.live or page.github %}
         <dl class="facts">
           {%- if page.year %}<div><dt>Year</dt><dd>{{ page.year }}</dd></div>{% endif %}
           {%- if page.role %}<div><dt>Role</dt><dd>{{ page.role }}</dd></div>{% endif %}
@@ -27,6 +29,7 @@ layout: default
           </dd></div>
           {%- endif %}
         </dl>
+        {%- endif %}
         {%- if page.image %}
         <figure class="shot">
           <div class="frame-img"><img src="{{ page.image | relative_url }}" alt="{{ page.caption | escape }}"></div>
@@ -37,10 +40,18 @@ layout: default
 {{ content }}
         </div>
         <footer class="article-foot">
-          <a href="{{ '/projects/' | relative_url }}">← All projects</a>
-          {%- if next_project %}
-          <a class="next" href="{{ next_project.url | relative_url }}">Next: {{ next_project.title }} →</a>
+          {%- if prev_project or next_project %}
+          <nav class="pn" aria-label="More projects">
+            {%- if prev_project %}
+            <a class="prev" href="{{ prev_project.url | relative_url }}"><span class="dir">← Previous</span><span class="t">{{ prev_project.title }}</span></a>
+            {%- endif %}
+            {%- if next_project %}
+            <a class="next" href="{{ next_project.url | relative_url }}"><span class="dir">Next →</span><span class="t">{{ next_project.title }}</span></a>
+            {%- endif %}
+          </nav>
           {%- endif %}
+          <a class="all" href="{{ '/projects/' | relative_url }}">← All projects</a>
+{%- include footer.html %}
         </footer>
       </article>
     </div>

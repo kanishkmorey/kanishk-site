@@ -25,7 +25,7 @@ defaults:
   - scope: { path: "", type: posts }
     values: { layout: post, nav: writing }
   - scope: { path: "", type: projects }
-    values: { layout: project, nav: projects }
+    values: { layout: project, nav: projects, order: 99 }
 
 exclude:
   - README.md
