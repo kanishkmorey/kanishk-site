@@ -8,44 +8,39 @@ driven by Markdown files; everything else is plain HTML/CSS/JS.
 - `_posts/`        One Markdown file per post
 - `_projects/`     One Markdown file per project
 - `_layouts/`      `default` (page shell + header), `post`, `project`
-- `_includes/`     `pager.html` (arrows + dots)
+- `_includes/`     `pager.html` (arrows + dots), `footer.html` (© line + back to top)
+- `_templates/`    Starter files to copy for a new post or project
+- `404.html`, `feed.xml`, `sitemap.xml`, `robots.txt`   Not-found page, RSS feed, search-engine files
 - `index.html`, `writing.html`, `projects.html`, `contact.html`   The pages
 - `styles.css`     All styling (colours are variables at the top)
-- `script.js`      Paginator (arrows, dots, left/right keys)
+- `script.js`      Paginator (arrows, dots, left/right keys) and article extras (code Copy button, captions)
 - `images/`        Photo, starfield, favicon
 
-## Add a post
-Create `_posts/YYYY-MM-DD-my-title.md`:
+## Add a post or project (quick version)
+Copy a starter file, rename it, fill it in:
 
-    ---
-    title: "My title"
-    summary: "One line shown on the Writing page."
-    ---
-    Markdown here. Use `## Heading`, `> quote`, lists, links, images, code.
+- `_templates/post.md`    -> `_posts/YYYY-MM-DD-short-title.md`
+- `_templates/project.md` -> `_projects/short-name.md`
 
-The date comes from the filename (future-dated posts stay hidden), and the
-"min read" is calculated automatically. "Next" at the bottom links to the
-next-older post.
+Only `title` is required. Every other line at the top is optional; delete it
+and that part of the page disappears. If `summary` is left out, the start of
+the post is used.
 
-## Add a project
-Create `_projects/my-project.md`:
+## Writing in Markdown (what you get for free)
+Plain Markdown works; these are the extras you don't have to configure:
 
-    ---
-    title: "My project"
-    summary: "One line shown on the tile."
-    order: 6                  # position on the Projects page (also the 01, 02… number)
-    year: "2026"
-    role: "Designer & developer"
-    stack: "HTML, CSS, JS"
-    live: "https://…"         # optional
-    github: "https://github.com/…"   # optional
-    image: images/my-project.jpg     # optional screenshot
-    caption: "Shown under the screenshot and used as its alt text"
-    ---
-    ## The problem
-    …
+- ` ```go ` code fence: syntax colours, a language label and a Copy button
+- `![alt](/images/x.jpg "Caption")`: the text in quotes becomes a caption
+- `## Heading` / `### Subheading`: get a `#` link on hover so sections can be linked
+- Tables, quotes (`>`), lists, `---` dividers are all styled
+- Links to other sites open in a new tab
+- "min read" is calculated; the date comes from the file name (or `date:` in the header)
 
-Omit any optional field and its block disappears from the page.
+Post header fields: `title`, `summary`, `tags: [a, b]`, `updated: YYYY-MM-DD`.
+Project header fields: `title`, `summary`, `order`, `status`, `year`, `role`,
+`stack`, `live`, `github`, `image`, `caption`.
+
+Put images in `images/` and refer to them as `/images/name.jpg`.
 
 ## Pagination
 Tiles are split into pages of `per_page` (default 4, in `_config.yml`).
